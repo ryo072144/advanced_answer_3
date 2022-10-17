@@ -15,16 +15,24 @@ class PetsNotifier extends StateNotifier<List<Pet>> {
   PetsNotifier(): super(initialPets);
 
   // 問１：　新しいリストオブジェクトを代入することに注意。
-  void addPet(Pet pet) {
-    state = [...state, pet];
+  void addPet(Pet newPet) {
+    List<ToDo> newState = [];
+    for (final pet in state){
+      newState.add(pet);
+    }
+    newState.add(newPet);
+    state = newState;
   }
 
   // 問２：　ペットをリストから削除するメソッド。ここでは名前が同じものを削除していますが、重複しないIDがあるほうが望ましいです。
   void removePet(String name){
-    state = [
-      for (final pet in state)
-        if (pet.name != name) pet,
-    ];
+    List<ToDo> newState = [];
+    for (final pet in state){
+      if(name != pet.name){
+        newState.add(pet);
+      }
+    }
+    state = newState;
   }
 }
 
